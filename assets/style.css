@@ -111,12 +111,15 @@ header {
 	justify-content: center;
 	width: 100%;
 	min-height: 470px;
-	background-image: url("images/slideshow/slide1.jpg");
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: cover;
-	margin-top: 0;
 	position: relative;
+}
+#banner img {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+	object-fit: cover;
+	object-position: center;
 }
 /* Code CSS en prévision de l'ajout d'un carousel pour la bannière */
 /* Gestion des fleches du carrousel */
