@@ -184,11 +184,12 @@ header {
 #products {
 	display: flex;
 	align-items: flex-start;
+	flex-direction: row-reverse;
 }
-#products article, #products aside {
+#products div, #products aside {
 	flex:1;
 }
-#products article {
+#products div {
 	padding: 0 6em;
 }
 #products h2 {
@@ -250,7 +251,7 @@ header {
 	padding: 6em ;
 }
 
-#contact article div {
+#contact .container > div > div {
 	display: flex;
 	padding-bottom: 20px;
 }
