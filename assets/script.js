@@ -72,7 +72,7 @@ function leftClick(e) {
 	console.log('arrow left click')
 }
 
-// add event listeners on the click of right and arrows and call the function rightClick or leftClick
+// add event listeners on the click of right and left arrows and call the function rightClick or leftClick
 arrowRight.addEventListener('click', rightClick)
 arrowLeft.addEventListener('click', leftClick)
 
