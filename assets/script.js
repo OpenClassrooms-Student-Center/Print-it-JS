@@ -1,6 +1,6 @@
 const slides = [
 	{
-		"image":"slide1.jpg",
+		"image":"slide1.jpg ",
 		"tagLine":"Impressions tous formats <span>en boutique et en ligne</span>"
 	},
 	{
