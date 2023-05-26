@@ -1,71 +1,106 @@
+// -------------------------------- Variables ------------------------------------
 
-// Definir les const pour les 2 fleches
+const arrowRight = document.querySelector(`.arrow_right`);
+const arrowLeft = document.querySelector('.arrow_left');
+const dot = document.querySelector('.dots');
+const dotContainer = document.querySelector(`.dots-container`)
+const banner = document.getElementById(`banner`)
+let bannerText = document.querySelector('#banner p');
+let bannerImg = document.querySelector('.banner-img')
+let slideIndex = 0;
 
-	const arrowLeft = document.querySelector(".arrow_left");
-	const arrowRight = document.querySelector(".arrow_right");
-	arrowLeft.addEventListener('click', function  () { console.log("Recule")});
-	arrowRight.addEventListener('click', function () { console.log("Avance")});
 
-// Definir animation  du fade en inserant une class .fade a la div mySlides pour l'animation depuis JS 
-
-/*
-
-const slide1 = document.querySelector("slide1")
-
-// Definir les images et le text lié
 const slides = [
 	{
-		image:slide1 ,
+		image:"../assets/images/slideshow/slide1.jpg",
 		tagLine:"Impressions tous formats <span>en boutique et en ligne</span>"
 	},
 	{
-		image:document.querySelector("slide2"),
+		image:"../assets//images/slideshow/slide2.jpg",
 		tagLine:"Tirages haute définition grand format <span>pour vos bureaux et events</span>"
 	},
 	{
-		image:document.querySelector("slide3"),
+		image:"../assets//images/slideshow/slide3.jpg",
 		tagLine:"Grand choix de couleurs <span>de CMJN aux pantones</span>"
 	},
 	{
-		image:document.querySelector("slide4"),
+		image:"../assets//images/slideshow/slide4.png",
 		tagLine:"Autocollants <span>avec découpe laser sur mesure</span>"
 	}
-];
+]
+ let slideIndexCurrent = slides[slideIndex]
+//----------------------------- FUNCTION -----------------------------
 
-/*	function Forward () {
-		let i =O
-		this.click()
-		slides[++i]   
-		slides[i].p.replace(slides[i{tagLine}])
-		if(i === slides.length){
-			i=0
-		}
+// ----------------INIT-----------
+function init () {
+	slides.forEach( () => {	
+		let newDot = document.createElement('div');
+		newDot.classList.add(`dots`);
+		dotContainer.append(newDot);
+		})
+		slideCurrent()
+}
+init()
+
+// ------------------Fleche ---------------
+function slideActionRight (){
+		if(slideIndex === slides.length -1){
+			 slideIndex = 0} 
+		else { slideIndex++ }
+		slides[slideIndex]
 	}
 
-console.log(slides)
 
-let i = 0
+function slideActionLeft (){
+		if(slideIndex === 0 ){
+			 slideIndex = slides.length-1} 
+		else { slideIndex--}
+		slides[slideIndex]
+	} 
 
-if( i === slides.lengh){i= 0}
+// function dotSelected (){
+// 	dot.classList.add('dot_selected')
+// }
+arrowRight.addEventListener('click', () => {
+	slideActionRight()
+	deleteElementText()
+	slideCurrent()
+	console.log(slideIndexCurrent);
+});
 
-function rotateCarroussel() {
-	
-		if(arrowLeft.click()){
-			slides[--i]
-		} else if (arrowRight.click()){
-			slides[++i]
-		} else {
-			setInterval ( ++slides[{}],4000)
-		}
-	}
+arrowLeft.addEventListener('click', () => {
+	slideActionLeft()
+	slideCurrent()
 
-	window.onload = function () {
-		var el = document.getElementById("title-div");
-		el.onclick = sayHello;
-	}
-	
-	function sayHello() {
-		console.log("Hello");
-	}
+});
 
-	*/
+function deleteElementText () {
+	bannerText.innerHTML(bannerText,"slideIndexCurrent.tagLine")
+}
+function slideCurrent(){
+	let imageCurrent
+	let textCurrent
+	imageCurrent = createImg(slideIndexCurrent)
+	textCurrent = createP(slideIndexCurrent)
+	console.log(`Nouvelle slide ${slideIndex+1} créé`);
+}
+
+function createImg () {
+	let img = document.createElement('img')
+	img.classList.add('banner-img')
+	img.setAttribute('id',"slide"+[slideIndex+1])			
+	img.setAttribute ('src',"")
+	img.setAttribute ('alt',"Slide")
+	img.src = `${slideIndexCurrent.image}`
+	console.log(img)
+	banner.append(img)
+	console.log(`Image ${slideIndex+1} Créé`)
+}
+
+function createP () {
+	let description = document.createElement('p')
+	description.innerHTML = slideIndexCurrent.tagLine
+	banner.append(description)
+	console.log('Paragraphe Créé')
+}
+
