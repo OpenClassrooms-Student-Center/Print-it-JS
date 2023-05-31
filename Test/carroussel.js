@@ -2,7 +2,6 @@
 
 const arrowRight = document.querySelector(`.arrow_right`);
 const arrowLeft = document.querySelector('.arrow_left');
-const dot = document.querySelector('.dots');
 const dotContainer = document.querySelector(`.dots-container`);
 const banner = document.getElementById(`banner`);
 let bannerImg = document.getElementsByClassName('banner-img');
@@ -34,13 +33,14 @@ const slideTotal = slides.length;
 
 // ----------------INIT-----------
 function init () {
+	
 	slides.reverse();
 
 	slides.forEach( (slide , index) => {	
 		const originalIndex = slides.length - index;
 
 		let newDot = document.createElement('div');
-		newDot.classList.add('dots');
+		newDot.classList.add('dot');
 		dotContainer.appendChild(newDot);
 	
 		let img = document.createElement('img');
@@ -51,41 +51,40 @@ function init () {
 		img.alt = "Slide";
 		banner.prepend(img);
 	});
-		createP ();
-		bannerImg[slideIndex].style.visibility = 'visible';	
+	slides.reverse();
+	bannerImg[slideIndex].style.visibility = 'visible';
+	createP ();
+	showP ()	
+	dotSelectedAdd ()
 }
 init();
 
 // ------------------Fleche ---------------
 function slideActionRight (){
 	bannerImg[slideIndex].style.visibility = 'hidden';
+	dotSelectedSupp ()
 	if(slideIndex === slides.length -1){
 			 slideIndex = 0} 
 	else { slideIndex++ }
+	showP ()
 	bannerImg[slideIndex].style.visibility = 'visible';
-	let bannerText = document.querySelector('#banner p');
-	bannerText.innerHTML = slides[slideIndex].tagLine;
-
+	dotSelectedAdd ()
 	}
 
 function slideActionLeft (){
 	bannerImg[slideIndex].style.visibility = 'hidden';
+	dotSelectedSupp ()
 	if(slideIndex === 0 ){
 			 slideIndex = slides.length-1} 
 	else { slideIndex--}
+	showP ()
 	bannerImg[slideIndex].style.visibility = 'visible';
-	let bannerText = document.querySelector('#banner p');
-	bannerText.innerHTML = slides[slideIndex].tagLine;
+	dotSelectedAdd ()
 	} 
 
-// function dotSelected (){
-// 	dot[slideIndex].classList.add('dot_selected')
-// }
 arrowRight.addEventListener('click', slideActionRight);
 
 arrowLeft.addEventListener('click', slideActionLeft);
-
-
 
 // --------------------- Create Images ------------------
 
@@ -94,6 +93,21 @@ function createP () {
 	let description = document.createElement('p')
 	description.innerHTML = slides[slideIndex].tagLine
 	banner.append(description)
-	console.log('Paragraphe Créé')
+	console.log(`Paragraphe Créé`)
+}
+
+function showP () {
+	let bannerText = document.querySelector('#banner p');
+	bannerText.innerHTML = slides[slideIndex].tagLine;
 }
 // -------------------- Changer  --------------
+
+function dotSelectedSupp () {
+	let dots = document.getElementsByClassName('dot');
+	dots[slideIndex].classList.remove('dot_selected');
+};
+
+function dotSelectedAdd() {
+	let dots = document.getElementsByClassName('dot');
+	dots[slideIndex].classList.add('dot_selected');
+  };
