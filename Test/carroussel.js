@@ -3,13 +3,13 @@
 const arrowRight = document.querySelector(`.arrow_right`);
 const arrowLeft = document.querySelector('.arrow_left');
 const dot = document.querySelector('.dots');
-const dotContainer = document.querySelector(`.dots-container`)
-const banner = document.getElementById(`banner`)
-let bannerText = document.querySelector('#banner p');
-let bannerImg = document.querySelector('.banner-img')
+const dotContainer = document.querySelector(`.dots-container`);
+const banner = document.getElementById(`banner`);
+let bannerImg = document.getElementsByClassName('banner-img');
+
+
 let slideIndex = 0;
-
-
+let slideIndexPlus = slideIndex +1;
 const slides = [
 	{
 		image:"../assets/images/slideshow/slide1.jpg",
@@ -28,79 +28,72 @@ const slides = [
 		tagLine:"Autocollants <span>avec découpe laser sur mesure</span>"
 	}
 ]
- let slideIndexCurrent = slides[slideIndex]
+
+const slideTotal = slides.length;
 //----------------------------- FUNCTION -----------------------------
 
 // ----------------INIT-----------
 function init () {
-	slides.forEach( () => {	
+	slides.reverse();
+
+	slides.forEach( (slide , index) => {	
+		const originalIndex = slides.length - index;
+
 		let newDot = document.createElement('div');
-		newDot.classList.add(`dots`);
-		dotContainer.append(newDot);
-		})
-		slideCurrent()
+		newDot.classList.add('dots');
+		dotContainer.appendChild(newDot);
+	
+		let img = document.createElement('img');
+		img.classList.add('banner-img');
+		img.style.visibility= 'hidden'
+		img.id = 'slide' + (originalIndex);
+		img.src = slide.image;
+		img.alt = "Slide";
+		banner.prepend(img);
+	});
+		createP ();
+		bannerImg[slideIndex].style.visibility = 'visible';	
 }
-init()
+init();
 
 // ------------------Fleche ---------------
 function slideActionRight (){
-		if(slideIndex === slides.length -1){
+	bannerImg[slideIndex].style.visibility = 'hidden';
+	if(slideIndex === slides.length -1){
 			 slideIndex = 0} 
-		else { slideIndex++ }
-		slides[slideIndex]
+	else { slideIndex++ }
+	bannerImg[slideIndex].style.visibility = 'visible';
+	let bannerText = document.querySelector('#banner p');
+	bannerText.innerHTML = slides[slideIndex].tagLine;
+
 	}
 
-
 function slideActionLeft (){
-		if(slideIndex === 0 ){
+	bannerImg[slideIndex].style.visibility = 'hidden';
+	if(slideIndex === 0 ){
 			 slideIndex = slides.length-1} 
-		else { slideIndex--}
-		slides[slideIndex]
+	else { slideIndex--}
+	bannerImg[slideIndex].style.visibility = 'visible';
+	let bannerText = document.querySelector('#banner p');
+	bannerText.innerHTML = slides[slideIndex].tagLine;
 	} 
 
 // function dotSelected (){
-// 	dot.classList.add('dot_selected')
+// 	dot[slideIndex].classList.add('dot_selected')
 // }
-arrowRight.addEventListener('click', () => {
-	slideActionRight()
-	deleteElementText()
-	slideCurrent()
-	console.log(slideIndexCurrent);
-});
+arrowRight.addEventListener('click', slideActionRight);
 
-arrowLeft.addEventListener('click', () => {
-	slideActionLeft()
-	slideCurrent()
+arrowLeft.addEventListener('click', slideActionLeft);
 
-});
 
-function deleteElementText () {
-	bannerText.innerHTML(bannerText,"slideIndexCurrent.tagLine")
-}
-function slideCurrent(){
-	let imageCurrent
-	let textCurrent
-	imageCurrent = createImg(slideIndexCurrent)
-	textCurrent = createP(slideIndexCurrent)
-	console.log(`Nouvelle slide ${slideIndex+1} créé`);
-}
 
-function createImg () {
-	let img = document.createElement('img')
-	img.classList.add('banner-img')
-	img.setAttribute('id',"slide"+[slideIndex+1])			
-	img.setAttribute ('src',"")
-	img.setAttribute ('alt',"Slide")
-	img.src = `${slideIndexCurrent.image}`
-	console.log(img)
-	banner.append(img)
-	console.log(`Image ${slideIndex+1} Créé`)
-}
+// --------------------- Create Images ------------------
 
+// -------------------- Create Paragraphe ---------------
 function createP () {
 	let description = document.createElement('p')
-	description.innerHTML = slideIndexCurrent.tagLine
+	description.innerHTML = slides[slideIndex].tagLine
 	banner.append(description)
 	console.log('Paragraphe Créé')
 }
-
+// -------------------- Changer  --------------
