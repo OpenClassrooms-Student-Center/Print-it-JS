@@ -16,7 +16,12 @@ const slides = [
 		"tagLine":"Autocollants <span>avec découpe laser sur mesure</span>"
 	}
 ]
+// Récupères chaques images et sont tagline
+// parcours chaque objet
+slides.forEach((image, tagLine) => console.log(image, tagLine))
 
+let premierSlide = slides[0]
+console.log(premierSlide)
 
 // Récupère les flèches
 const arrow_left = document.querySelector(".arrow_left")
@@ -24,9 +29,6 @@ console.log(arrow_left);
 
 const arrow_right = document.querySelector(".arrow_right")
 console.log(arrow_right);
-
-// let arrow = document.querySelectorAll(".arrow")
-// console.log(arrow)
 
 // Ecoute évènement lors du click sur les flèches
 arrow_left.addEventListener("click", (event) =>{
@@ -36,3 +38,21 @@ arrow_left.addEventListener("click", (event) =>{
 arrow_right.addEventListener("click", (event) =>{
 	console.log("fleche droite")
 })
+
+
+
+// Récupère les dots
+const dots = document.getElementsByClassName("dot")
+console.log(dots)
+
+
+// 
+for (let i = 0; i < dots.length; i++) {
+	const dot = dots[i];
+	const slide = slides[i]
+	console.log(i,dot, slide)
+	
+}
+
+// let premierDot = dots[0]
+// console.log(premierDot)
