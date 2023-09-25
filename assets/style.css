@@ -123,8 +123,14 @@ header {
 }
 /* Code CSS en prévision de l'ajout d'un carousel pour la bannière */
 /* Gestion des fleches du carrousel */
+/* DJ : Ajout Propriétés Flex etlargeur de la classe Arrow */
 #banner .arrow {
+	display: flex;
+	flex-direction: row;
+	justify-content:space-between;
+	align-items: flex-end;
 	position: absolute;
+	width: 95%;
 }
 #banner .arrow_left {
 	left: 10px;
