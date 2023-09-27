@@ -121,6 +121,7 @@ header {
 	object-fit: cover;
 	object-position: center;
 }
+
 /* Code CSS en prévision de l'ajout d'un carousel pour la bannière */
 /* Gestion des fleches du carrousel */
 /* DJ : Ajout Propriétés Flex etlargeur de la classe Arrow */
@@ -132,8 +133,16 @@ header {
 	position: absolute;
 	width: 95%;
 }
+
+button#slidebouton {
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+}
+
 #banner .arrow_left {
 	left: 10px;
+
 }
 #banner .arrow_right {
 	right: 10px;
