@@ -29,6 +29,7 @@ arrowright.addEventListener("click", slideRight);
 /*Création des bulles points*/
 const dotsBullet = document.querySelector(".dots");
 
+/* Boucle qui permet de rajouter un bullet point en fonction du nombre d'images*/
 for (let i = 0; i < slides.length; i++) {
   const dot = document.createElement("div");
   dot.className = "dot";
