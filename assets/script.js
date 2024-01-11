@@ -20,43 +20,62 @@ const slides = [
 
 // Récuperer les elements :)
 
-const ImagesSlider=document.getElementById("js-banner-img");
-console.log(ImagesSlider) 
-
-const DotsSlider=document.getElementById("js-dots"); // pour créé les dots
-console.log(DotsSlider)
 
 // les flèches
 const ArrowLeft = document.getElementById("js-arrow_left"); 
 const ArrowRight = document.getElementById("js-arrow_right"); 
 
 
+//caroussel
+const ImagesSlider=document.getElementById("js-banner-img");
+
+const DotsSlider=document.getElementById("js-dots"); 
+const TaglineElement = document.getElementById("js-text-img");
+
+let currentSlideIndex = 0;
 
 
 
-// ajouter les dots
 
-for (let i = 0; i < 4; i++) {
+// ajouter les 4 dots  
+
+for (let i = 0; i < slides.length; i++) {
     const newDot = document.createElement("div");
     newDot.classList.add("dot");
-    DotsSlider.appendChild(newDot);
+    DotsSlider.appendChild(newDot); // pour liéé l’élément créé à la page html
 }
 
-// Set the first dot as active initially
-DotsSlider.children[0].classList.add("active");
+const dots = DotsSlider.querySelectorAll(".dot");
 
 
 
 
-// ajouter les event listeners à des flèches
 
-ArrowLeft.addEventListener('click', function() {
-    console.log('Left arrow clicked!');
-    // Add your event handling code for left arrow here
+// Function to update the image, tagline, and dots based on the current slide index
+
+function updateSlide() {
+    ImagesSlider.src = src="./assets/images/slideshow/"+ slides[currentSlideIndex].image;
+    TaglineElement.innerHTML = slides[currentSlideIndex].tagLine;
+
+	
+    dots.forEach(dot => dot.classList.remove("dot_selected"));
+    dots[currentSlideIndex].classList.add("dot_selected");
+}
+
+
+// ajouter les eventlisteners à des flèches 
+
+ArrowLeft.addEventListener('click', () => {
+    currentSlideIndex = (currentSlideIndex - 1 + slides.length) % slides.length;
+    updateSlide();
 });
 
 
-ArrowRight.addEventListener('click', function() {
-    console.log('Right arrow clicked!');
-    // Add your event handling code for right arrow here
+ArrowRight.addEventListener('click', () => {
+    currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+    updateSlide();
 });
+
+
+updateSlide();
+
