@@ -103,7 +103,7 @@ header {
 .devis {
 	background-color: var(--secondary-color);
 }
-
+/* ! Début du Carrousel */
 #banner {
 	display: flex;
 	flex-direction: column;
@@ -121,8 +121,8 @@ header {
 	object-fit: cover;
 	object-position: center;
 }
-/* Code CSS en prévision de l'ajout d'un carousel pour la bannière */
-/* Gestion des fleches du carrousel */
+/*! Code CSS en prévision de l'ajout d'un carousel pour la bannière */
+/*! Gestion des fleches du carrousel */
 #banner .arrow {
 	position: absolute;
 }
@@ -132,7 +132,7 @@ header {
 #banner .arrow_right {
 	right: 10px;
 }
-/* Gestion des points du carrousel */
+/*! Gestion des points du carrousel */
 .dots {
 	position: absolute;
 	bottom: 40px;
@@ -150,7 +150,8 @@ header {
 .dot_selected {
 	background-color: #fff;
 }
-/* Fin du code CSS pour le carousel */
+/*! Fin du code CSS pour le carousel */
+/* * Carrousel texte */
 #banner p {
 	font-family: 'Roboto Slab', sans-serif;
 	font-weight: 900;
@@ -165,6 +166,7 @@ header {
 	font-weight: 400;
 	font-size: 30px;
 }
+/* * Fin Carrousel texte */
 #about-us {
 	display: flex;
 }
