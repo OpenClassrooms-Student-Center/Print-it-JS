@@ -4,7 +4,9 @@
 	--secondary-color: #CD006B;
 	--third-color: #EEE325;
 }
-
+body {
+	background-color: #28363D;
+}
 /* Reset CSS */
 * {
 	-webkit-box-sizing: border-box;
