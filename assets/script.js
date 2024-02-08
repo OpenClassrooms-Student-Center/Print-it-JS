@@ -53,41 +53,23 @@ function arrowClick() {
     imageIndex++;
     if (imageIndex === slides.length) {
       imageIndex = 0;
+    createDot();
     }
     bannerImg.src = slides[imageIndex].image;
     tagLine.innerHTML = slides[imageIndex].tagLine;
-    createDot();
   });
 }
+arrowClick(imageIndex);
 
-arrowClick();
 // ! =====Dot part=====
-
-// function createDot (i) {
-//   let dot = document.createElement("div");
-//   dot.classList.add("dot");
-//   dots.appendChild(dot);
-//   let dotCounter = 0;
-//   if (i === dotCounter) {
-//     dot.classList.add("dot_selected");
-//   }
-// }
-// function displayDot () {
-//   for (let i = 0; i < slides.length; i++) {
-//     createDot(i);
-//     dotCounter++;
-//   }
-// }
-
-//  ! premiere tentative de dot
 function createDot() {
   for (let i = 0; i < slides.length; i++) {
     let dot = document.createElement("div");
     dot.classList.add("dot");
     dots.appendChild(dot);
-  }
-  if (imageIndex === slides.length - 1) {
-    dot.classList.add("dot_selected");
+    if (i === imageIndex) {
+      dot.classList.add("dot_selected");
+    }
   }
 }
 createDot();
