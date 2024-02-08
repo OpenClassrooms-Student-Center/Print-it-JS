@@ -18,72 +18,76 @@ const slides = [
   },
 ];
 
-// ! =====Arrow part======
+// ! Variables
+let dots = document.querySelector(".dots");
+let imageIndex = 0;
+let bannerImg = document.querySelector(".banner-img");
+let tagLine = document.querySelector("#banner p");
+let banner = document.getElementById("banner");
 
+// ! =====Arrow part======
 function arrowClick() {
-  let banner = document.getElementById("banner");
   let arrow = document.createElement("div");
   banner.appendChild(arrow);
   arrow.classList.add("arrow");
   let arrowLeft = document.createElement("img");
-  let arrowRight = document.createElement("img");
-  // ? faire une fonction pour prendre les deux balise img en un seul ordre
   arrow.appendChild(arrowLeft);
-  Object.assign(arrowLeft, {
-    src: "./assets/images/arrow_left.png",
-    alt: "arrow-left",
-  });
-  arrow.appendChild(arrowRight);
-  Object.assign(arrowRight, {
-    src: "./assets/images/arrow_right.png",
-    alt: "arrowRight",
-  });
+  arrowLeft.setAttribute("src", "./assets/images/arrow_left.png");
+  arrowLeft.setAttribute("alt", "arrow-left");
+
   arrowLeft.addEventListener("click", () => {
-    const bannerImg = document.querySelector(".banner-img");
-    bannerImg.setAttribute("src", "../assets/images/slideshow/slide2.jpg");
+    imageIndex--;
+    if (imageIndex === -1) {
+      imageIndex = slides.length - 1;
+    }
+    bannerImg.src = slides[imageIndex].image;
+    tagLine.innerHTML = slides[imageIndex].tagLine;
   });
+
+  let arrowRight = document.createElement("img");
+  arrow.appendChild(arrowRight);
+  arrowRight.setAttribute("src", "./assets/images/arrow_right.png");
+  arrowRight.setAttribute("alt", "arrowRight");
+
   arrowRight.addEventListener("click", () => {
-    console.log("fabien");
+    imageIndex++;
+    if (imageIndex === slides.length) {
+      imageIndex = 0;
+    }
+    bannerImg.src = slides[imageIndex].image;
+    tagLine.innerHTML = slides[imageIndex].tagLine;
+    createDot();
   });
 }
+
 arrowClick();
 // ! =====Dot part=====
-// * Je recupere le container des dots
-let dots = document.querySelector(".dots");
-// * Je crée une variable pour compter les index
-let indexCounter = 0;
-// * Je crée une fonction pour créer les dots
-function createDot (i) {
-  // * Je crée une variable pour chaque dot
-  let dot = document.createElement("div");
-  // * Je lui donne une class
-  dot.classList.add("dot");
-  // * Je l'ajoute dans le container
-  dots.appendChild(dot);
-  // * Je lui donne une valeur
-  if (i === indexCounter) {
-    // * Je lui donne une class
+
+// function createDot (i) {
+//   let dot = document.createElement("div");
+//   dot.classList.add("dot");
+//   dots.appendChild(dot);
+//   let dotCounter = 0;
+//   if (i === dotCounter) {
+//     dot.classList.add("dot_selected");
+//   }
+// }
+// function displayDot () {
+//   for (let i = 0; i < slides.length; i++) {
+//     createDot(i);
+//     dotCounter++;
+//   }
+// }
+
+//  ! premiere tentative de dot
+function createDot() {
+  for (let i = 0; i < slides.length; i++) {
+    let dot = document.createElement("div");
+    dot.classList.add("dot");
+    dots.appendChild(dot);
+  }
+  if (imageIndex === slides.length - 1) {
     dot.classList.add("dot_selected");
   }
 }
-// * Je crée une fonction pour afficher les dots
-function displayDot () {
-  // * Je crée une boucle pour chaque slide
-  for (let i = 0; i < slides.length; i++) {
-    // * J'appelle la fonction createDot
-    createDot(i);
-  }
-}
-// * J'appelle la fonction displayDot
- displayDot(); 
-
-
-//  ! premiere tentative de dot
-//   for (let i = 0; i < slides.length; i++) {
-//     let dot = document.createElement("div");
-//     dot.classList.add("dot");
-//     dots.appendChild(dot);
-//     if (i === 0) {
-//       dot.classList.add("dot_selected");
-//     }
-//   }
+createDot();
