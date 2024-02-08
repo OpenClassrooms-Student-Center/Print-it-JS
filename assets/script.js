@@ -18,58 +18,67 @@ const slides = [
   },
 ];
 
-// ! Variables
-let dots = document.querySelector(".dots");
-let imageIndex = 0;
-let bannerImg = document.querySelector(".banner-img");
-let tagLine = document.querySelector("#banner p");
-let banner = document.getElementById("banner");
+// ? Variables globales
+const banner = document.getElementById("banner");
+const arrows = document.createElement("div");
+arrows.classList.add("arrow");
+banner.appendChild(arrows);
+const dots = document.querySelector(".dots");
+const bannerImg = document.querySelector(".banner-img");
+const tagLine = document.querySelector("#banner p");
+let slideIndex = 0;
 
-// ! =====Arrow part======
-function arrowClick() {
-  let arrow = document.createElement("div");
-  banner.appendChild(arrow);
-  arrow.classList.add("arrow");
-  let arrowLeft = document.createElement("img");
-  arrow.appendChild(arrowLeft);
-  arrowLeft.setAttribute("src", "./assets/images/arrow_left.png");
-  arrowLeft.setAttribute("alt", "arrow-left");
-
-  arrowLeft.addEventListener("click", () => {
-    imageIndex--;
-    if (imageIndex === -1) {
-      imageIndex = slides.length - 1;
-    }
-    bannerImg.src = slides[imageIndex].image;
-    tagLine.innerHTML = slides[imageIndex].tagLine;
-  });
-
-  let arrowRight = document.createElement("img");
-  arrow.appendChild(arrowRight);
-  arrowRight.setAttribute("src", "./assets/images/arrow_right.png");
-  arrowRight.setAttribute("alt", "arrowRight");
-
-  arrowRight.addEventListener("click", () => {
-    imageIndex++;
-    if (imageIndex === slides.length) {
-      imageIndex = 0;
-    createDot();
-    }
-    bannerImg.src = slides[imageIndex].image;
-    tagLine.innerHTML = slides[imageIndex].tagLine;
-  });
-}
-arrowClick(imageIndex);
-
-// ! =====Dot part=====
+// ? affichages des dots
 function createDot() {
   for (let i = 0; i < slides.length; i++) {
-    let dot = document.createElement("div");
+    const dot = document.createElement("div");
     dot.classList.add("dot");
     dots.appendChild(dot);
-    if (i === imageIndex) {
+    if (i == slideIndex) {
       dot.classList.add("dot_selected");
     }
   }
 }
+// ? gestion de la fleche gauche
+function arrowClickLeft () {
+  const leftArrow = document.createElement('img');
+  leftArrow.classList.add('.arrow_left');
+  leftArrow.setAttribute("src", "./assets/images/arrow_left.png");
+  arrows.appendChild(leftArrow);
+  leftArrow.addEventListener("click", () => {
+    const arrayDots = document.querySelectorAll(".dots .dot");
+    arrayDots[slideIndex].classList.remove("dot_selected");
+    slideIndex--;
+    if ( slideIndex < 0) {
+      slideIndex = slides.length -1;
+    }
+    bannerImg.src = slides[slideIndex].image;
+    tagLine.innerHTML = slides[slideIndex].tagLine;
+    arrayDots[slideIndex].classList.add("dot_selected");
+  })
+    
+}
+
+// ? gestion de la fleche droite 
+function arrowClickRight () {
+  const rightArrow = document.createElement('img');
+  rightArrow.classList.add('.arrow_left');
+  rightArrow.setAttribute("src", "./assets/images/arrow_right.png");
+  arrows.appendChild(rightArrow);
+  rightArrow.addEventListener("click", () => {
+    const arrayDots = document.querySelectorAll(".dots .dot");
+    arrayDots[slideIndex].classList.remove("dot_selected");
+    slideIndex++;
+    if ( slideIndex > slides.length -1) {
+      slideIndex = 0;
+    }
+    bannerImg.src = slides[slideIndex].image;
+    tagLine.innerHTML = slides[slideIndex].tagLine;
+    arrayDots[slideIndex].classList.add("dot_selected");
+  })
+    
+}
+// ? appel des fonctions 
 createDot();
+arrowClickLeft();
+arrowClickRight();
